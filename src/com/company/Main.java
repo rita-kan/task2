@@ -51,14 +51,13 @@ public class Main {
             output.writeObject(matrix);
             output.flush();
             output.close();
-            try (ObjectInputStream input = new ObjectInputStream(new FileInputStream("tmp.out"))) {
-                Matrix[] res = (Matrix[]) input.readObject();
-                System.out.println("HAVE BEEN DESERIALIZED:");
-                for (int i = 0; i < res.length; i++)
-                    res[i].printMatrix();
-            } catch (IOException ex) {
-                System.out.println(ex.toString());
-            }
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+        }
+        try (ObjectInputStream input = new ObjectInputStream(new FileInputStream("tmp.out"))) {
+            Matrix[] res = (Matrix[]) input.readObject();
+            System.out.println("HAVE BEEN DESERIALIZED:");
+            for (Matrix r : res) r.printMatrix();
         } catch (IOException ex) {
             System.out.println(ex.toString());
         }
